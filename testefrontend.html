@@ -14,18 +14,22 @@
             background-color: #f8f9fa;
             border: 1px solid #dee2e6;
             text-align: center;
-            font-size: 1rem; /* Tamanho do texto ajustado */
+            font-size: 1rem;
             margin-bottom: 20px;
-            height: 400px; /* Altura padronizada */
+            height: 400px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            overflow: hidden; /* Evita a barra de rolagem */
-            box-sizing: border-box; /* Inclui padding e border no cálculo da largura e altura */
+            overflow: hidden;
+            box-sizing: border-box;
+            position: relative;
         }
-
+        .imagemGrande{
+            height: 100%;
+            width: 100%;
+        }
         .img-zoom {
-            max-width: 100%; /* Imagem ajustada para caber na largura da <div> */
+            max-width: 100%;
             height: auto;
             transition: transform 0.5s ease;
         }
@@ -44,13 +48,22 @@
         .navbar-custom {
             background-color: #FE6613;
         }
+        .btn-orange {
+    background-color: #FE6613; 
+    color: white; 
+    border: none; 
+}
+
+.btn-orange:hover {
+    background-color: #d95413;
+}
 
         .orange-box {
             background-color: #FE6613;
             color: white;
             padding: 10px;
             text-align: center;
-            height: 100px; /* Altura padronizada */
+            height: 100px;
         }
 
         .row-equal-height {
@@ -71,10 +84,26 @@
             width: 100%;
             height: auto;
         }
-        .img-thumbnail{
-            height: 150px;
+
+        .img-thumbnail {
+            height: 180px;
             width: 200px;
-        } 
+        }
+
+        /* Zoom animation */
+        .zoom-on-load {
+            animation: zoomIn 1s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.2);
+            }
+        }
+        
     </style>
 </head>
 <body>
@@ -147,10 +176,10 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="content border border-dark">
+                <div class="content border border-dark position-relative p-3">
                     <!-- Cálculo da Regra de Três -->
-                    <h3 class="mb-4">Cálculo da Regra de Três</h3>
-                    <div class="row">
+                    <h3 class="position-absolute top-0 start-0 mt-3 ms-2">Regra de 3</h3>
+                    <div class="row mt-3">
                         <div class="col-6 mb-2">
                             <input type="number" class="form-control" id="input1" placeholder="Valor A">
                         </div>
@@ -164,72 +193,105 @@
                             <input type="number" class="form-control" id="input4" placeholder="Valor D">
                         </div>
                     </div>
-                    <button class="btn btn-primary" onclick="calcular()">Calcular</button>
-                    <div id="resultado" class="mt-3"></div>
+                    <button class="btn btn-primary mt-3" onclick="calcular()">Calcular</button>
+                    <div id="resultado" class="orange-box mt-3"></div>
                 </div>
             </div>
         </div>
         <div class="row">
             <!-- Segunda Linha de Divs -->
             <div class="col-md-4">
-                <div class="content border border-dark">Div 4</div>
+                <div class="content border border-dark position-relative ">
+                    <img src="imagens/casa.jpg" alt="Casa" class="imagemGrande" >
+                </div>
+                <button class="btn btn-orange mt-2 mb-4 w-100" data-bs-toggle="modal" data-bs-target="#modalImagem">Abrir Imagem no Modal</button>
+
             </div>
             <div class="col-md-4">
-                <div class="content border border-dark">Div 5</div>
+                <div class="content border border-dark ">
+                    <!-- Exemplo de uso da biblioteca html2canvas -->
+                    <div id="capture">
+                        <img src="imagens/casa.jpg" alt="Casa"  class="imagemGrande">
+                        <div class="orange-box mt-2">Imovel Guilde</div>
+                    </div>
+                  
+                </div>
+                <button class="btn btn-primary mt-2 w-50" onclick="baixarImagem()">Download</button>
             </div>
             <div class="col-md-4">
-                <div class="content border border-dark">Div 6</div>
+                <div class="content border border-dark zoom-on-load">
+                    <img src="imagens/casa.jpg" alt="Casa" class="img-thumbnail">
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="modalImagem" tabindex="-1" aria-labelledby="modalImagemLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalImagemLabel">Imagem</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="imagens/casa.jpg" alt="Casa" class="modal-img">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>© 2024 Meu Site. Todos os direitos reservados.</p>
+        <p>&copy; 2024 Minha Página. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
     <script>
-        // Função para aplicar a máscara do CPF
         function applyCpfMask(input) {
             let value = input.value.replace(/\D/g, '');
-            value = value.replace(/(\d{3})(\d)/, '$1.$2');
-            value = value.replace(/(\d{3})(\d)/, '$1.$2');
-            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-            input.value = value;
+            if (value.length > 11) value = value.slice(0, 11);
+            input.value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
         }
 
-        // Função para aplicar a máscara do telefone
         function applyPhoneMask(input) {
             let value = input.value.replace(/\D/g, '');
-            value = value.replace(/(\d{2})(\d)/, '($1) $2');
-            value = value.replace(/(\d{4})(\d)/, '$1-$2');
-            input.value = value;
+            if (value.length > 11) value = value.slice(0, 11);
+            input.value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
         }
 
-        // Função para mostrar o alerta
         function showAlert(event) {
             event.preventDefault();
             alert('Mensagem enviada!');
         }
 
-        // Função para calcular a regra de três
         function calcular() {
             const a = parseFloat(document.getElementById('input1').value);
             const b = parseFloat(document.getElementById('input2').value);
             const c = parseFloat(document.getElementById('input3').value);
             const d = parseFloat(document.getElementById('input4').value);
-
-            if (!isNaN(a) && !isNaN(b) && !isNaN(c) && d) {
-                const resultado = (b * c) / a;
-                document.getElementById('resultado').innerText = `Resultado: ${resultado.toFixed(2)}`;
+            
+            if (!isNaN(a) && !isNaN(b) && !isNaN(c) && !isNaN(d)) {
+                const resultado = (d * b) / c;
+                document.getElementById('resultado').innerText = resultado.toFixed(2);
             } else {
-                document.getElementById('resultado').innerText = 'Preencha todos os campos corretamente.';
+                document.getElementById('resultado').innerText = 'Preencha todos os campos.';
             }
+        }
+
+        function baixarImagem() {
+            html2canvas(document.getElementById('capture')).then(canvas => {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'captura.png';
+                link.click();
+            });
         }
     </script>
 </body>
