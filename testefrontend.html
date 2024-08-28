@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface com Flexbox e Grid</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .content {
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            text-align: center;
+            font-size: 1rem; /* Tamanho do texto ajustado */
+            margin-bottom: 20px;
+            height: 400px; /* Altura padronizada */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden; /* Evita a barra de rolagem */
+            box-sizing: border-box; /* Inclui padding e border no cálculo da largura e altura */
+        }
+
+        .img-zoom {
+            max-width: 100%; /* Imagem ajustada para caber na largura da <div> */
+            height: auto;
+            transition: transform 0.5s ease;
+        }
+
+        .img-zoom:hover {
+            transform: scale(1.2);
+        }
+
+        .footer {
+            background-color: #1B2653;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .navbar-custom {
+            background-color: #FE6613;
+        }
+
+        .orange-box {
+            background-color: #FE6613;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            height: 100px; /* Altura padronizada */
+        }
+
+        .row-equal-height {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .row-equal-height .col-md-4 {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .masked-input {
+            text-align: center;
+        }
+
+        .modal-img {
+            width: 100%;
+            height: auto;
+        }
+        .img-thumbnail{
+            height: 150px;
+            width: 200px;
+        } 
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="#">Minha Página</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div class="container my-5">
+        <div class="row row-equal-height">
+            <!-- Primeira Linha de Divs -->
+            <div class="col-md-4">
+                <div class="content border border-dark">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="imagens/pessoa.jpg" alt="Pessoa 1" class="img-thumbnail me-3 img-zoom">
+                        <div>
+                            <p><strong>George</strong></p>
+                            <p>1.250 pontos</p>
+                            <button class="btn btn-primary btn-sm" onclick="alert('Telefone: (21) 99999-9999')">Ver Telefone</button>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <img src="imagens/pessoa2.jpg" alt="Pessoa 2" class="img-thumbnail me-3 img-zoom">
+                        <div>
+                            <p><strong>Bruno</strong></p>
+                            <p>1.300 pontos</p>
+                            <button class="btn btn-primary btn-sm" onclick="alert('Telefone: (21) 98888-8888')">Ver Telefone</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="content border border-dark">
+                    <!-- Mensagem Grande -->
+                    <h3 class="mb-4">Mande uma mensagem:</h3>
+                    
+                    <!-- Formulário -->
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" class="form-control masked-input" id="cpf" placeholder="Digite seu CPF" oninput="applyCpfMask(this)">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control masked-input" id="telefone" placeholder="Digite seu Telefone" oninput="applyPhoneMask(this)">
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" id="assunto" rows="3" placeholder="Digite o Assunto"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" onclick="showAlert(event)">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="content border border-dark">
+                    <!-- Cálculo da Regra de Três -->
+                    <h3 class="mb-4">Cálculo da Regra de Três</h3>
+                    <div class="row">
+                        <div class="col-6 mb-2">
+                            <input type="number" class="form-control" id="input1" placeholder="Valor A">
+                        </div>
+                        <div class="col-6 mb-2">
+                            <input type="number" class="form-control" id="input2" placeholder="Valor B">
+                        </div>
+                        <div class="col-6 mb-2">
+                            <input type="number" class="form-control" id="input3" placeholder="Valor C">
+                        </div>
+                        <div class="col-6 mb-2">
+                            <input type="number" class="form-control" id="input4" placeholder="Valor D">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="calcular()">Calcular</button>
+                    <div id="resultado" class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Segunda Linha de Divs -->
+            <div class="col-md-4">
+                <div class="content border border-dark">Div 4</div>
+            </div>
+            <div class="col-md-4">
+                <div class="content border border-dark">Div 5</div>
+            </div>
+            <div class="col-md-4">
+                <div class="content border border-dark">Div 6</div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Meu Site. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        // Função para aplicar a máscara do CPF
+        function applyCpfMask(input) {
+            let value = input.value.replace(/\D/g, '');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            input.value = value;
+        }
+
+        // Função para aplicar a máscara do telefone
+        function applyPhoneMask(input) {
+            let value = input.value.replace(/\D/g, '');
+            value = value.replace(/(\d{2})(\d)/, '($1) $2');
+            value = value.replace(/(\d{4})(\d)/, '$1-$2');
+            input.value = value;
+        }
+
+        // Função para mostrar o alerta
+        function showAlert(event) {
+            event.preventDefault();
+            alert('Mensagem enviada!');
+        }
+
+        // Função para calcular a regra de três
+        function calcular() {
+            const a = parseFloat(document.getElementById('input1').value);
+            const b = parseFloat(document.getElementById('input2').value);
+            const c = parseFloat(document.getElementById('input3').value);
+            const d = parseFloat(document.getElementById('input4').value);
+
+            if (!isNaN(a) && !isNaN(b) && !isNaN(c) && d) {
+                const resultado = (b * c) / a;
+                document.getElementById('resultado').innerText = `Resultado: ${resultado.toFixed(2)}`;
+            } else {
+                document.getElementById('resultado').innerText = 'Preencha todos os campos corretamente.';
+            }
+        }
+    </script>
+</body>
+</html>
