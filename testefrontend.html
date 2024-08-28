@@ -9,6 +9,9 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        #capture{
+            height: 100%;
+        }
         .content {
             padding: 10px;
             background-color: #f8f9fa;
@@ -31,7 +34,7 @@
         .img-zoom {
             max-width: 100%;
             height: auto;
-            transition: transform 0.5s ease;
+            transition: transform 2.5s ease;
         }
 
         .img-zoom:hover {
@@ -46,7 +49,7 @@
         }
 
         .navbar-custom {
-            background-color: #FE6613;
+            background-color: #1B2653;
         }
         .btn-orange {
     background-color: #FE6613; 
@@ -57,7 +60,9 @@
 .btn-orange:hover {
     background-color: #d95413;
 }
-
+a{
+    color: #d95413;
+}
         .orange-box {
             background-color: #FE6613;
             color: white;
@@ -65,7 +70,21 @@
             text-align: center;
             height: 100px;
         }
-
+        .navbar-custom {
+            background-color: #1B2653;
+        }
+        .nav-left {
+            margin-right: auto;
+        }
+        .nav-right {
+            margin-left: auto;
+        }
+        .nav-link {
+            color: white !important;
+        }
+        .nav-link:hover {
+            color: #FE6613 !important;
+        }
         .row-equal-height {
             display: flex;
             flex-wrap: wrap;
@@ -116,18 +135,38 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav d-flex flex-row nav-left">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Início</a>
+                        <a class="nav-link" href="#">Condomínios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Sobre</a>
+                        <a class="nav-link" href="#">Fórum</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Contato</a>
+                        <a class="nav-link" href="#">Guia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Artigos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ferramentas</a>
                     </li>
                 </ul>
-            </div>
+                <ul class="navbar-nav d-flex flex-row nav-right">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Cotar imóveis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Planos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Entrar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Cadastrar</a>
+                    </li>
+                </ul>
+                    </div>
         </div>
     </nav>
 
@@ -142,7 +181,7 @@
                         <div>
                             <p><strong>George</strong></p>
                             <p>1.250 pontos</p>
-                            <button class="btn btn-primary btn-sm" onclick="alert('Telefone: (21) 99999-9999')">Ver Telefone</button>
+                            <a class=" btn-sm" onclick="alert('Telefone: (21) 99999-9999')">Ver Telefone</a>
                         </div>
                     </div>
                     <div class="d-flex align-items-center">
@@ -150,7 +189,7 @@
                         <div>
                             <p><strong>Bruno</strong></p>
                             <p>1.300 pontos</p>
-                            <button class="btn btn-primary btn-sm" onclick="alert('Telefone: (21) 98888-8888')">Ver Telefone</button>
+                            <a class=" btn-sm" onclick="alert('Telefone: (21) 98888-8888')">Ver Telefone</a>
                         </div>
                     </div>
                 </div>
@@ -171,7 +210,7 @@
                         <div class="mb-3">
                             <textarea class="form-control" id="assunto" rows="3" placeholder="Digite o Assunto"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary" onclick="showAlert(event)">Enviar Mensagem</button>
+                        <button type="submit" class="btn btn-orange" onclick="showAlert(event)">Enviar Mensagem</button>
                     </form>
                 </div>
             </div>
@@ -193,8 +232,8 @@
                             <input type="number" class="form-control" id="input4" placeholder="Valor D">
                         </div>
                     </div>
-                    <button class="btn btn-primary mt-3" onclick="calcular()">Calcular</button>
-                    <div id="resultado" class="orange-box mt-3"></div>
+                    <button class="btn btn-orange mt-3" onclick="calcular()">Calcular</button>
+                   
                 </div>
             </div>
         </div>
@@ -205,22 +244,24 @@
                     <img src="imagens/casa.jpg" alt="Casa" class="imagemGrande" >
                 </div>
                 <button class="btn btn-orange mt-2 mb-4 w-100" data-bs-toggle="modal" data-bs-target="#modalImagem">Abrir Imagem no Modal</button>
-
             </div>
             <div class="col-md-4">
-                <div class="content border border-dark ">
+                <div class="content border border-dark">
                     <!-- Exemplo de uso da biblioteca html2canvas -->
                     <div id="capture">
                         <img src="imagens/casa.jpg" alt="Casa"  class="imagemGrande">
-                        <div class="orange-box mt-2">Imovel Guilde</div>
+                         <div class="orange-box mt-2">Imovel Guilde</div>
                     </div>
                   
                 </div>
-                <button class="btn btn-primary mt-2 w-50" onclick="baixarImagem()">Download</button>
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-orange mt-2 w-50" onclick="baixarImagem()">Download</button>
+                </div>
+                
             </div>
             <div class="col-md-4">
                 <div class="content border border-dark zoom-on-load">
-                    <img src="imagens/casa.jpg" alt="Casa" class="img-thumbnail">
+                    <img src="imagens/casa.jpg" alt="Casa" class="imagemGrande">
                 </div>
             </div>
         </div>
