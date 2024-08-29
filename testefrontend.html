@@ -14,56 +14,27 @@
         body {
     font-family: 'Roboto', sans-serif;
 }
+.navbar-custom {
+            background-color: #1B2653;
+        }
+        .nav-left {
+            margin-right: auto;
+        }
+        .nav-right {
+            margin-left: auto;
+        }
+        .nav-link {
+            color: white !important;
+        }
+        .nav-link:hover {
+            color: #FE6613 !important;
+        }
 
-        .footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-}
 .btn-bottom-left {
     position: absolute;
     bottom: 20px; 
     left: 10px; 
     width: 170px; 
-}
-.footer-left, .footer-right {
-    display: flex;
-    
-}
-
-.footer-left {
-    display: flex;
-}
-
-.footer-right {
-    display: flex;
-
-    align-items: flex-end;
-}
-
-@media (max-width: 768px) {
-    .footer-left {
-        display: none;
-    }
-
-    .footer-right {
-        align-items: center;
-        text-align: center;
-    }
-}
-.footer p {
-    margin: 50px 0;
-    margin-left:40px;
-}
-
-.footer img {
-    max-width: 100px; /* Ajuste o tamanho conforme necessário */
-    margin-top: 10px;
-    margin-right: 50px;
-    margin-left: 70px;
-    margin-bottom: 15px;
 }
         #capture{
             position: relative; /* Define o contêiner pai como relativo para que o posicionamento absoluto funcione */
@@ -98,16 +69,8 @@
             transform: scale(1.2);
         }
 
-        .footer {
-            background-color: #1B2653;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-        }
+      
 
-        .navbar-custom {
-            background-color: #1B2653;
-        }
         .btn-orange {
     background-color: #FE6613; 
     color: white; 
@@ -133,21 +96,7 @@ a{
     width: calc(100% - 20px); 
     opacity: 0.8;
 }
-        .navbar-custom {
-            background-color: #1B2653;
-        }
-        .nav-left {
-            margin-right: auto;
-        }
-        .nav-right {
-            margin-left: auto;
-        }
-        .nav-link {
-            color: white !important;
-        }
-        .nav-link:hover {
-            color: #FE6613 !important;
-        }
+     
         .row-equal-height {
             display: flex;
             flex-wrap: wrap;
@@ -201,7 +150,50 @@ a{
     }
 
 }
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color:  #1B2653;
+    color: white;
+}
+.footer-left, .footer-right {
+    display: flex;
+    
+}
 
+.footer-left {
+    display: flex;
+}
+
+.footer-right {
+    display: flex;
+
+    align-items: flex-end;
+}
+
+@media (max-width: 768px) {
+    .footer-left {
+        display: none;
+    }
+
+    .footer-right {
+        align-items: center;
+        text-align: center;
+    }
+}
+.footer p {
+    margin: 50px 0;
+    margin-left:40px;
+}
+
+.footer img {
+    max-width: 100px; /* Ajuste o tamanho conforme necessário */
+    margin-top: 10px;
+    margin-right: 50px;
+    margin-left: 70px;
+    margin-bottom: 15px;
+}
         
     </style>
 </head>
@@ -302,22 +294,23 @@ a{
             <div class="col-md-4">
                 <div class="content border border-dark position-relative p-3">
                     <!-- Cálculo da Regra de Três -->
-                    <h3 class="position-absolute top-0 start-0 mt-3 ms-2">Regra de 3</h3>
-                    <div class="row mt-3">
-                        <div class="col-6 mb-2">
-                            <input type="number" class="form-control" id="input1" placeholder="Valor A">
+                    <h3 class="mb-4">Cálculo de Regra de Três</h3>
+                    <!-- Formulário para Regra de Três -->
+                    <form id="regra-tres-form" class="inputs-grid">
+                        <div class="input-group">
+                            <input type="number" id="valor1" class="form-control" placeholder="Valor 1" required>
+                            <input type="number" id="valor3" class="form-control" placeholder="Valor 3" required>
                         </div>
-                        <div class="col-6 mb-2">
-                            <input type="number" class="form-control" id="input2" placeholder="Valor B">
+                        <div class="input-group">
+                            <input type="number" id="valor2" class="form-control" placeholder="Valor 2" required>
+                            <input type="number" id="valor4" class="form-control" placeholder="Valor 4" required>
                         </div>
-                        <div class="col-6 mb-2">
-                            <input type="number" class="form-control" id="input3" placeholder="Valor C">
-                        </div>
-                        <div class="col-6 mb-2">
-                            <input type="number" class="form-control" id="input4" placeholder="Valor D">
-                        </div>
+                        <button type="button" class="btn btn-orange" onclick="calcularRegraTres()">Calcular</button>
+                    </form>
+                    <div class="orange-box" id="resultado">
+                        Resultado da Regra de Três
                     </div>
-                    <button class="btn btn-orange btn-bottom-left" onclick="calcular()">Calcular</button>
+
                    
                 </div>
             </div>
@@ -433,17 +426,17 @@ a{
             alert('Mensagem enviada!');
         }
 
-        function calcular() {
-            const a = parseFloat(document.getElementById('input1').value);
-            const b = parseFloat(document.getElementById('input2').value);
-            const c = parseFloat(document.getElementById('input3').value);
-            const d = parseFloat(document.getElementById('input4').value);
-            
-            if (!isNaN(a) && !isNaN(b) && !isNaN(c) && !isNaN(d)) {
-                const resultado = (d * b) / c;
-                document.getElementById('resultado').innerText = resultado.toFixed(2);
+        function calcularRegraTres() {
+            const valor1 = parseFloat(document.getElementById('valor1').value);
+            const valor2 = parseFloat(document.getElementById('valor2').value);
+            const valor3 = parseFloat(document.getElementById('valor3').value);
+            const valor4 = parseFloat(document.getElementById('valor4').value);
+
+            if (!isNaN(valor1) && !isNaN(valor2) && !isNaN(valor3) && !isNaN(valor4)) {
+                const resultado = (valor4 * valor2) / valor1;
+                document.getElementById('resultado').innerText = `Resultado: ${resultado.toFixed(2)}`;
             } else {
-                document.getElementById('resultado').innerText = 'Preencha todos os campos.';
+                document.getElementById('resultado').innerText = 'Por favor, insira valores válidos.';
             }
         }
 
